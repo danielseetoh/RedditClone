@@ -1,0 +1,35 @@
+<h1 class="text-center">Topics Page</h1>
+
+<!-- error -->
+<div ng-if="errorMessage" class="alert alert-danger">
+  <strong>Error:</strong> {{ errorMessage }}
+</div>
+<!-- end error -->
+
+<!-- topics -->
+<div ng-repeat="topic in topicsData">
+	<div class="panel-body">
+		<pre>{{ topic.text }}</pre>
+		<a href="/" ng-click='upvote(topic.id)'>
+		<img src="static/redstar/img/upvote.jpg" class="vote-arrow" >
+		</a>
+		<b>Upvotes: {{ topic.upvotes }} | 
+		<a href="/" ng-click="downvote(topic.id)">
+		<img src="static/redstar/img/downvote.jpg" class="vote-arrow">
+		</a>
+		Downvotes: {{ topic.downvotes }}
+		</b>
+	</div>
+</div>
+<!-- end topics -->
+
+<!-- pagination -->
+<div class="text-center">
+Page: 
+<b ng-repeat="pageNumber in numPages">
+<a href="/" ng-click="setPageNumber(pageNumber)">
+{{ pageNumber }}
+</a>
+</b>
+</div>
+<!-- end pagination -->
