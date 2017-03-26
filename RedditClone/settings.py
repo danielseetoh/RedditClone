@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '27e210zwq0d0r5$d$#r4-qj)!p0$r@9fh0k*1j@km3bdni7e59'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -93,6 +93,33 @@ DATABASES = {
         'PORT': os.environ.get('DATABASE_PORT'),
     }
 }
+
+# for uploading to heroku, following heroku's env var for database_url format
+if ((os.environ.get('DATABASE_URL')!='localhost') and os.environ.get('DATABASE_URL')):
+
+    # split the environment variable up into the respective fields
+    database_credentials = os.environ.get('DATABASE_URL')
+    first_delimiter = database_credentials.find('://')+2
+    second_delimiter = database_credentials.find(':', first_delimiter+1)
+    third_delimiter = database_credentials.find('@', second_delimiter+1)
+    fourth_delimiter = database_credentials.find(':', third_delimiter+1)
+    fifth_delimiter = database_credentials.find('/', fourth_delimiter+1)
+    name = database_credentials[fifth_delimiter+1:]
+    user = database_credentials[first_delimiter+1:second_delimiter]
+    password = database_credentials[second_delimiter+1:third_delimiter]
+    host = database_credentials[third_delimiter+1:fourth_delimiter]
+    port = database_credentials[fourth_delimiter+1:fifth_delimiter]
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': name,
+            'USER': user,
+            'PASSWORD': password,
+            'HOST': host,
+            'PORT': port,
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
