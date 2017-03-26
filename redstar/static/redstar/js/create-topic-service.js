@@ -1,5 +1,5 @@
 (function(){
-	var service = function($log, $http){
+	var service = function($log, $http, redstarServerService){
 
 		// creates a new topic
 		var createTopic = function(data, callback){
@@ -10,8 +10,8 @@
 			$http({
 				method: 'POST',
 				url: url,
-				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			    transformRequest: formURLEncode,
+				headers: redstarServerService.header,
+			    transformRequest: redstarServerService.formURLEncode,
 			    data: data
 			})
 			.then(successCallback, errorCallback);
@@ -34,22 +34,14 @@
 
 		};
 
-		// encode the data with content type application/x-www-form-urlencoded
-		var formURLEncode = function(obj) {
-	        var str = [];
-	        for(var p in obj)
-	        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-	        return str.join("&");
-	    };
 
 	    // exposes these functions as part of this service
 		return {
-			createTopic: createTopic,
-			formURLEncode: formURLEncode
+			createTopic: createTopic
 		};
 
 	};
 
 	var module = angular.module('redstarMain');
-	module.factory('redstarCreateTopicService', ['$log', '$http', service]);
+	module.factory('redstarCreateTopicService', ['$log', '$http', 'redstarServerService', service]);
 })();

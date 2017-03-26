@@ -1,13 +1,21 @@
-<h1>Topics Page</h1>
-<p>error message</p>
+<h1 class="text-center">Topics Page</h1>
 <div ng-if="errorMessage" class="alert alert-danger">
   <strong>Error:</strong> {{ errorMessage }}
 </div>
 <div ng-repeat="topic in topicsData">
 	<div class="panel-body">
 		<pre>{{ topic.text }}</pre>
-		<b>Upvotes: {{ topic.upvotes }} | Downvotes: {{ topic.downvotes }}
+		<a href="/" ng-click='upvote(topic.id)'>
+		<img src="static/redstar/img/upvote.jpg" class="vote-arrow" >
+		</a>
+		<b>Upvotes: {{ topic.upvotes }} | 
+		<a href="/" ng-click="downvote(topic.id)">
+		<img src="static/redstar/img/downvote.jpg" class="vote-arrow">
+		</a>
+		Downvotes: {{ topic.downvotes }}
 		</b>
+		
+		
 	</div>
 
 	
