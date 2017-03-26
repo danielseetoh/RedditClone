@@ -8,3 +8,4 @@ httpie==0.9.9
 Pillow==3.4.2
 psycopg2==2.7.1
 requests==2.9.1
+whitenoise==3.3.0
