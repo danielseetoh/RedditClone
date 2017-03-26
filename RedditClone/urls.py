@@ -21,5 +21,4 @@ import redstar.views
 urlpatterns = [
 	url(r'^', include('redstar.urls')),
     # url(r'^admin/', admin.site.urls),
-    # url('^.*$', redstar.views.IndexView.as_view(), name='index'),
 ]

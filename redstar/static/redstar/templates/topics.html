@@ -1,1 +1,14 @@
 <h1>Topics Page</h1>
+<p>error message</p>
+<div ng-if="errorMessage" class="alert alert-danger">
+  <strong>Error:</strong> {{ errorMessage }}
+</div>
+<div ng-repeat="topic in topicsData">
+	<div class="panel-body">
+		<pre>{{ topic.text }}</pre>
+		<b>Upvotes: {{ topic.upvotes }} | Downvotes: {{ topic.downvotes }}
+		</b>
+	</div>
+
+	
+</div>

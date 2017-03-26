@@ -1,0 +1,15 @@
+<h1 class="text-center">Submit Page</h1>
+<br/>
+
+
+
+<div class="col-md-8 col-md-offset-2">
+	<div ng-if="errorMessage" class="alert alert-danger">
+	  <strong>Error:</strong> {{ errorMessage }}
+	</div>
+	<form id="create-form" name="create-form">
+		<textarea ng-model="topicText" class="form-control" name="topicText" placeholder="Add a topic (less than 255 characters)"></textarea>
+		<br/>
+		<button class="btn btn-primary btn-lg" ng-click="createTopic()" value="submit">Submit Topic</button>
+	</form>
+</div>
