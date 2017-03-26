@@ -2,10 +2,13 @@
 	var service = function($log, $http, redstarServerService){
 
 		// gets all the current topics
-		var getTopicsData = function(callback){
+		var getTopicsData = function(pageNumber, callback){
 
-			var url = "api/topics/";
-
+			if (pageNumber > 0){
+				var url = "api/topics/?page="+pageNumber;
+			} else {
+				var url = "api/topics/";
+			}
 			// retrieve all the current topics in descending order of upvotes
 			$http({
 				method: 'GET',
@@ -17,8 +20,8 @@
 			function successCallback(response){
 				$log.debug("getTopicsData success");
 				callback({
-					success:true,
-					topicsData:response
+					success: true,
+					topicsData: response
 				});
 			}
 
@@ -26,8 +29,8 @@
 			function errorCallback(response){
 				$log.debug("getTopicsData fail");
 				callback({
-					success:false,
-					topicsData:response
+					success: false,
+					topicsData: response
 				})
 			}
 		};
@@ -46,7 +49,7 @@
 			function successCallback(response){
 				$log.debug("Upvote success");
 				callback({
-					success:true
+					success: true
 				});
 			}
 
@@ -54,7 +57,7 @@
 			function errorCallback(response){
 				$log.debug("Upvote fail");
 				callback({
-					success:false
+					success: false
 				})
 			}
 		};
@@ -73,7 +76,7 @@
 			function successCallback(response){
 				$log.debug("Downvote success");
 				callback({
-					success:true
+					success: true
 				});
 			}
 
@@ -81,19 +84,46 @@
 			function errorCallback(response){
 				$log.debug("Downvote fail");
 				callback({
-					success:false
+					success: false
 				})
 			}
 		};
 
+		var getNumPages = function(callback){
+			var url = "api/topics/numPages/";
 
+			$http({
+				method: 'GET',
+				url: url,
+			})
+			.then(successCallback, errorCallback);
+
+			// on success
+			function successCallback(response){
+				$log.debug("getNumPages success");
+				callback({
+					success: true,
+					numPages: response.data
+				});
+			}
+
+			// on error
+			function errorCallback(response){
+				$log.debug("getNumPages fail");
+				callback({
+					success: false,
+					numPages: response.data
+				})
+			}
+		}
 
 
 		// exposed functions as part of this service
 		return {
 			getTopicsData: getTopicsData,
 			upvoteTopic: upvoteTopic,
-			downvoteTopic: downvoteTopic
+			downvoteTopic: downvoteTopic,
+			getNumPages: getNumPages
 		}
 
 	};

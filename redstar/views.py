@@ -1,10 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic.base import TemplateView
 from django.utils.decorators import method_decorator
 from serializers import *
 from rest_framework import viewsets, generics
+from django.core.paginator import Paginator
+from rest_framework.decorators import list_route, detail_route
+from django.core.paginator import Paginator
 
 # Create your views here.
 class IndexView(TemplateView):
@@ -25,6 +28,10 @@ class TopicViewSet(viewsets.ModelViewSet):
 	queryset = Topic.objects.all().order_by('-upvotes')
 	serializer_class = TopicSerializer
 
+def getNumPages(request):
+	all_topics = Topic.objects.all()
+	p = Paginator(all_topics, 20)
+	return JsonResponse({'data':p.num_pages})
 
 def upvote(request, topicId):
 	"""

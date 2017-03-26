@@ -8,6 +8,7 @@ router = routers.SimpleRouter()
 router.register(r'topics', views.TopicViewSet)
 
 urlpatterns = [
+	url('^api/topics/numPages/', views.getNumPages),
 	url('^api/', include(router.urls)),
 	url(r'upvote/([0-9]+)/', views.upvote),
 	url(r'downvote/([0-9]+)/', views.downvote),
