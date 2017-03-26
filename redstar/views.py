@@ -29,6 +29,9 @@ class TopicViewSet(viewsets.ModelViewSet):
 	serializer_class = TopicSerializer
 
 def getNumPages(request):
+	"""
+	get total number of pages for pagination
+	"""
 	all_topics = Topic.objects.all()
 	p = Paginator(all_topics, 20)
 	return JsonResponse({'data':p.num_pages})
