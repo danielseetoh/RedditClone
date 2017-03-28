@@ -27,7 +27,7 @@
 		}
 
 		// downvote a topic
-		// page will relaod upon downvoting
+		// page will reload upon downvoting
 		$scope.downvote = function(topicId){
 			$log.debug(topicId);
 			redstarTopicsService.downvoteTopic(topicId, function(response){
@@ -61,7 +61,7 @@
 		function getTopicsData(){
 			redstarTopicsService.getTopicsData($scope.pageNumber, function(response){
 				if (response.success){
-					$scope.topicsData = response.topicsData.data.results;
+					$scope.topicsData = response.topicsData.data.topics;
 					$scope.errorMessage = "";
 				} else {
 					$scope.errorMessage = "Unable to retrieve data from server.";

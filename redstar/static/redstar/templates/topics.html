@@ -10,11 +10,11 @@
 <div ng-repeat="topic in topicsData">
 	<div class="panel-body">
 		<pre>{{ topic.text }}</pre>
-		<a href="/" ng-click='upvote(topic.id)'>
+		<a href="/" ng-click='upvote(topic.topic_id)'>
 		<img src="static/redstar/img/upvote.jpg" class="vote-arrow" >
 		</a>
 		<b>Upvotes: {{ topic.upvotes }} | 
-		<a href="/" ng-click="downvote(topic.id)">
+		<a href="/" ng-click="downvote(topic.topic_id)">
 		<img src="static/redstar/img/downvote.jpg" class="vote-arrow">
 		</a>
 		Downvotes: {{ topic.downvotes }}

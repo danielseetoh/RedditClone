@@ -8,7 +8,7 @@
 	// application configuration, enables things such as $log.debug and removes the need for django's csrf_token by using angular's
 	app.config(function($locationProvider, $logProvider, $httpProvider) {
 	    $locationProvider.html5Mode(true);
-	    $logProvider.debugEnabled(true)
+	    $logProvider.debugEnabled(true);
 	    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
 		$httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 	});

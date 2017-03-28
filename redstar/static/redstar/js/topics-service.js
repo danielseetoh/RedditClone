@@ -37,7 +37,7 @@
 
 		// upvote topic by id
 		var upvoteTopic = function(topicId, callback){
-			var url = "upvote/" + topicId + "/";
+			var url = "api/upvote/" + topicId + "/";
 
 			$http({
 				method: 'PATCH',
@@ -64,7 +64,7 @@
 
 		// downvote topic by id
 		var downvoteTopic = function(topicId, callback){
-			var url = "downvote/" + topicId + "/";
+			var url = "api/downvote/" + topicId + "/";
 
 			$http({
 				method: 'PATCH',

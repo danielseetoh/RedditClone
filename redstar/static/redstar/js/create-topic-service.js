@@ -3,9 +3,8 @@
 
 		// creates a new topic
 		var createTopic = function(data, callback){
-
-			var url = "api/topics/";
-
+			var url = "api/createTopic/";
+			
 			// sends the data over to the server to create a new topic
 			$http({
 				method: 'POST',
